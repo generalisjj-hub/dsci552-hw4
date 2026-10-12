@@ -1,0 +1,15 @@
+[project]
+name = "dsci552-hw4"
+version = "0.1.0"
+description = "DSCI 552 Homework 4"
+requires-python = ">=3.12"
+dependencies = [
+    "ipykernel",
+    "jupytext",
+    "matplotlib",
+    "nbconvert",
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "statsmodels",
+]
