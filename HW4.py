@@ -1,5 +1,7 @@
 # %% [markdown]
 # # DSCI 552 Homework 4
+#
+# **Jun Jiang** · GitHub: `generalisjj-hub`
 # ## 2. Time Series Classification Part 2: Binary and Multiclass Classification
 #
 # Homework 4 uses the fixed AReM split from Homework 3: datasets 1--2 from
@@ -38,6 +40,8 @@ from statsmodels.tools.sm_exceptions import PerfectSeparationError
 
 
 DATA_ROOT = Path("data/AReM")
+if not DATA_ROOT.exists():
+    DATA_ROOT = Path("../data/AReM")
 ACTIVITIES = (
     "bending1",
     "bending2",
