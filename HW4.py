@@ -235,10 +235,11 @@ plot_scatter_pairs(train_l1, segment=1, title="l = 1: bending versus other")
 # %% [markdown]
 # ### 2(a)(ii) Scatter plots after splitting each series in two
 #
-# Splitting adds a first-half and a second-half feature vector.  The broad
-# bending-versus-other separation remains, while the two segments expose where
-# within a 120-second record the values occur; it does not create a different
-# class definition.
+# Splitting exposes within-record variation: for `var_rss23`, a bending
+# instance has a maximum of 13.61 in the first half and 6.02 in the second.
+# For `var_rss12`, bending observations tend to have low means
+# both before and after splitting, but they overlap with some other activities;
+# the plots do not show complete separation.
 
 # %%
 train_l2 = FEATURE_TABLES[2].query("split == 'train'").reset_index(drop=True)
@@ -491,6 +492,11 @@ else:
     )
 
 # %% [markdown]
+# The test accuracy is 89.47%, 7.67 percentage points below the 97.14%
+# five-fold CV accuracy. Performance on this fixed test set is therefore lower
+# than the cross-validation estimate.
+
+# %% [markdown]
 # ### 2(a)(vii) Case-control sampling for the imbalanced binary classes
 #
 # The training set has 9 bending and 60 other instances.  A one-to-one
@@ -635,6 +641,11 @@ print(
     "L1 selection is easier to implement because coefficient shrinkage and selection occur in one model; "
     "RFE explicitly refits multiple reduced feature sets."
 )
+
+# %% [markdown]
+# L1 logistic achieves 98.57% CV accuracy and 94.74% test accuracy, versus
+# 97.14% and 89.47% for RFE: improvements of 1.43 and 5.26 percentage points,
+# respectively, on these samples.
 
 # %% [markdown]
 # ### 2(c)(i) L1-penalized multinomial logistic regression
@@ -877,6 +888,13 @@ print(
     f"On this fixed test set, {best_multiclass_method} has the lowest observed test error. "
     "This comparison is specific to the given split."
 )
+
+# %% [markdown]
+# Gaussian Naive Bayes has the lowest error on this fixed test set (10.53%),
+# compared with L1 multinomial logistic regression (15.79%) and Multinomial
+# Naive Bayes (26.32%). The CV ranking differs: L1 logistic has 92.73% accuracy
+# versus 87.01% for Gaussian Naive Bayes, so the test-set ranking may not
+# generalize.
 
 # %% [markdown]
 # ## 3. ISLR (2nd edition) 4.8.3
